@@ -1,0 +1,46 @@
+package Multidimensional_Array;
+
+import java.util.Scanner;
+
+public class Diagonal_Difference {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = new int[n][n];
+
+        fillMatrix(matrix, scanner);
+
+        int sumPrimary = getSumPrimaryDiagonal(matrix);
+
+        int sumSecondary = getSumSecondaryDiagonal(matrix);
+
+        System.out.println(Math.abs(sumPrimary - sumSecondary));
+    }
+
+    private static int getSumSecondaryDiagonal(int[][] matrix) {
+        int sum = 0;
+        int row = 0;
+        for (int col = matrix.length - 1; col >= 0; col--) {
+            sum += matrix[row][col];
+            row++;
+        }
+        return sum;
+    }
+
+    private static int getSumPrimaryDiagonal(int[][] matrix) {
+        int sum = 0;
+        for (int rowAndCol = 0; rowAndCol < matrix.length; rowAndCol++) {
+            sum += matrix[rowAndCol][rowAndCol];
+        }
+        return sum;
+    }
+
+    private static void fillMatrix(int[][] matrix, Scanner scanner) {
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix.length; col++) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+    }
+}
