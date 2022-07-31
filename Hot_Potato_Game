@@ -1,0 +1,26 @@
+package Stack_Queue_topic;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class L6_HotPotato {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] childrenArr = scanner.nextLine().split(" ");
+        ArrayDeque<String> children = new ArrayDeque<>();
+        int tossCount = Integer.parseInt(scanner.nextLine());
+
+        for (String child : childrenArr) {
+            children.offerLast(child);
+        }
+
+        while (children.size() != 1) {
+            for (int count = 1; count < tossCount; count++) {
+                String childWithPotato = children.pollFirst();
+                children.offerLast(childWithPotato);
+            }
+            System.out.println("Removed " + children.pollFirst());
+        }
+        System.out.println("Last is " + children.peek());
+    }
+}
